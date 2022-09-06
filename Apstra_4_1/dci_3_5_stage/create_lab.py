@@ -391,9 +391,9 @@ def delete_lab_vmx():
 
 def configure_vqfx():
 
-    print("We will wait around 2 minutes to start the initial vQFX configuration")
+    print("We will wait around 5 minutes to start the initial vQFX configuration")
     start_time = time.time()
-    sleep(120)
+    sleep(300)
     run_time = time.time() - start_time
     print("** Time waiting: %s sec" % round(run_time, 2))
     sleep(5)
@@ -411,8 +411,8 @@ def configure_vqfx():
 
 def configure_vmx():
 
-    print("We will wait around 1 minute to start the initial vMX CORE configuration")
-    sleep(60)
+    print("We will wait around 3 minute to start the initial vMX CORE configuration")
+    sleep(180)
 
     vmx_hosts = create_vmx_dic()
 

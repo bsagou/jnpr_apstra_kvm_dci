@@ -12,11 +12,11 @@ from time import sleep
 import re
 import os
 
-re_image = '/var/lib/libvirt/images/vqfx-20.2R1.10-re.qcow2'
+re_image = '/var/lib/libvirt/images/vqfx-20.4R3-S4.8-re.qcow2'
 pfe_image = '/var/lib/libvirt/images/vqfx-20.2R1.10-pfe.qcow2'
 generic_centos = '/var/lib/libvirt/images/CentOS-7-x86_64-GenericCloud.qcow2'
 image_path = '/var/lib/libvirt/images/'
-apstra_image = 'aos_server_4.0.2-142.qcow2'
+apstra_image = 'aos_server_4.1.1-287.qcow2'
 
 aos_vm = {'apstra_server': {'hostname': 'apstra_server', 'eth0': 'virbr0', 'eth1': 'none'},}
 
@@ -74,7 +74,7 @@ def create_lab_vqfx():
     print("--------------------------------------------------------- Creating vQFX DC1 Images")
 
     copy_vqf_pfe = f'cp images/vqfx-20.2R1-2019010209-pfe-qemu.qcow {pfe_image}'
-    copy_vqf_re = f'cp images/jinstall-vqfx-10-f-20.2R1.10.img {re_image}'
+    copy_vqf_re = f'cp images/jinstall-vqfx-10-f-20.4R3-S4.8.img {re_image}'
 
     subprocess.call(copy_vqf_pfe, shell=True)
     subprocess.call(copy_vqf_re, shell=True)
@@ -323,9 +323,9 @@ def create_lab_vmx():
     print("---------------------------------------------------------")
     print("--------------------------------------------------------- Creating Core MPLS ")
 
-    copy_vmx_re = f'cp images/junos-vmx-x86-64-20.4R1.12.qcow2 {image_path}junos-vmx-x86-64-20.4R1.12.qcow2'
+    copy_vmx_re = f'cp images/junos-vmx-x86-64-20.4R3.8.qcow2 {image_path}junos-vmx-x86-64-20.4R3.8.qcow2'
     copy_vmx_hdd = f'cp images/vmxhdd.img {image_path}vmxhdd.img'
-    copy_vmx_fpc = f'cp images/vFPC-20201209.img  {image_path}vFPC-20201209.img'
+    copy_vmx_fpc = f'cp images/vFPC-20210824.img  {image_path}vFPC-20210824.img'
 
     subprocess.call(copy_vmx_re, shell=True)
     subprocess.call(copy_vmx_hdd, shell=True)
@@ -377,9 +377,9 @@ def delete_lab_vmx():
         subprocess.call(delete_vmx_router, shell=True)
 
     unbind_interfaces = f'./vmx.sh --unbind-dev --cfg config_apstra/apstra-topology.conf'
-    delete_vmx_re = f'rm -f {image_path}junos-vmx-x86-64-20.4R1.12.qcow2'
+    delete_vmx_re = f'rm -f {image_path}junos-vmx-x86-64-20.4R3.8.qcow2'
     delete_vmx_hdd = f'rm -f {image_path}vmxhdd.img'
-    delete_vmx_fpc = f'rm -f  {image_path}vFPC-20201209.img'
+    delete_vmx_fpc = f'rm -f  {image_path}vFPC-20210824.img'
     clean_known_hosts = f'echo "" > ~/.ssh/known_hosts'
 
     subprocess.call(unbind_interfaces, shell=True)
